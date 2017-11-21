@@ -31,38 +31,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         // super llamar al constructor padre para que haga por defecto su comportamiento
         super.onStart();
         Test.myToast(this, "onStart");
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         Test.myToast(this, "onResume");
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         Test.myToast(this, "onPause");
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         Test.myToast(this, "onStop");
     }
 
     @Override
-    protected void onRestart(){
+    protected void onRestart() {
         super.onRestart();
         Test.myToast(this, "onRestart");
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         Test.myToast(this, "onDestroy");
     }
