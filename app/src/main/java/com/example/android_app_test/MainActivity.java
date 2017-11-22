@@ -1,6 +1,7 @@
 package com.example.android_app_test;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,15 +10,14 @@ import android.widget.TextView;
 import android.app.Activity;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     // R es un recurso de android, es una clase
     // e.g. acceder a una imagen: R.drawable
     // e.g acceder a icono R.mipmap.ic_launcher
 
-    private TextView tv;
-
-    private Button btn;
+    private View btn;
+    private final String GREETER = "Hello from the other side!";
 
     // Se llama cuando se inicia el activity
     @Override
@@ -25,49 +25,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         // esta linea de abajo indica el layout xml que se usa
         setContentView(R.layout.activity_main);
-        tv = (TextView) findViewById(R.id.tv_hw);
-        tv.setText("Cambio de texto");
 
-        // Actividades https://developer.android.com/training/basics/activity-lifecycle/starting.html
-        // Un activity es la vista de la aplicacion
-        // Ver diagrama para ver como es el ciclo de vida y los onCreate, onStart, etc
-        // Un activity solo puede tener un contexto
-        Context context = this;
-        Test.myToast(context, "onCreate");
+        btn = (Button) findViewById(R.id.buttonMain);
 
-        // Metodo 1
-        // opcion mas recomendable que usar android:onClick="miMetodo" en el xml
-/*        btn = (Button) findViewById(R.id.buttonMain);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Button clicked!", Toast.LENGTH_LONG).show();
+//                Toast.makeText(MainActivity.this, "Button clicked!", Toast.LENGTH_LONG).show();
+                // Acceder al segundo activity y mandarle un string
+                // Creamos inntent, de donde estamos a donde vamos
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                // Pasamos el valor al intent
+                intent.putExtra("greeter2", GREETER);
+                // Lanzar el nuevo activity
+                startActivity(intent);
             }
-        });*/
-
-        // parte de metodo 3
-        btn = (Button) findViewById(R.id.buttonMain);
-        // this es el que se esta implementando en implements View.OnClickListener
-        btn.setOnClickListener(this);
-
+        });
 
     }
 
-    // para metodo 3 para boton
-    @Override
-    public void onClick(View view){
-        Toast.makeText(MainActivity.this, "Button clicked!", Toast.LENGTH_LONG).show();
-    }
 
-    // Metodo 2 para boton para llamar desde el xml
-    // MainActivity.this es el contexto de mainactivity
-    public void miMetodo(View v) {
-        int a = 4;
-        Toast.makeText(MainActivity.this, "valor: " + a, Toast.LENGTH_LONG).show();
-    }
-
-
-    @Override
+  /*  @Override
     protected void onStart() {
         // super llamar al constructor padre para que haga por defecto su comportamiento
         super.onStart();
@@ -103,6 +81,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onDestroy();
         Test.myToast(this, "onDestroy");
     }
-
+*/
 
 }
