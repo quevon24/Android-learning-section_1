@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                Toast.makeText(MainActivity.this, "Button clicked!", Toast.LENGTH_LONG).show();
                 // Acceder al segundo activity y mandarle un string
-                // Creamos inntent, de donde estamos a donde vamos
+                // Creamos explicity intent, en estos se especifica en donde estamos y a donde vamos
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 // Pasamos el valor al intent
                 intent.putExtra("greeter2", GREETER);
