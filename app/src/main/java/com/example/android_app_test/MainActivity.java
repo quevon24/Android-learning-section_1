@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.app.Activity;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     // R es un recurso de android, es una clase
     // e.g. acceder a una imagen: R.drawable
@@ -37,15 +37,26 @@ public class MainActivity extends AppCompatActivity {
 
         // Metodo 1
         // opcion mas recomendable que usar android:onClick="miMetodo" en el xml
-        btn = (Button) findViewById(R.id.buttonMain);
+/*        btn = (Button) findViewById(R.id.buttonMain);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Button clicked!", Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
+
+        // parte de metodo 3
+        btn = (Button) findViewById(R.id.buttonMain);
+        // this es el que se esta implementando en implements View.OnClickListener
+        btn.setOnClickListener(this);
 
 
+    }
+
+    // para metodo 3 para boton
+    @Override
+    public void onClick(View view){
+        Toast.makeText(MainActivity.this, "Button clicked!", Toast.LENGTH_LONG).show();
     }
 
     // Metodo 2 para boton para llamar desde el xml
