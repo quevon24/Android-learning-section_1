@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
     tools:context="com.example.android_app_test.SecondActivity">
 
     <TextView
@@ -17,4 +13,15 @@
         android:text=""
         tools:layout_editor_absoluteX="162dp"
         tools:layout_editor_absoluteY="246dp" />
-</android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/buttonGoThird"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimary"
+        android:textColor="#fff"
+        android:text="Ir a tercer activity"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/textViewMain"
+        android:layout_toEndOf="@+id/textViewMain" />
+</android.widget.RelativeLayout>

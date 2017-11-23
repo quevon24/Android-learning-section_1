@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 // Creamos explicity intent, en estos se especifica en donde estamos y a donde vamos
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 // Pasamos el valor al intent
-                intent.putExtra("greeter2", GREETER);
+                intent.putExtra("greeter", GREETER);
                 // Lanzar el nuevo activity
                 startActivity(intent);
             }
