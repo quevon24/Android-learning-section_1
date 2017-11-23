@@ -39,6 +39,7 @@ public class ThirdActivity extends AppCompatActivity {
         imgBtnWeb = (ImageButton) findViewById(R.id.imageButtonWeb);
         imgBtnCamera = (ImageButton) findViewById(R.id.imageButtonCamera);
 
+        // Boton para llamadas
         imgBtnPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +71,7 @@ public class ThirdActivity extends AppCompatActivity {
                                 Intent i = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                                 // pasar info para abrir la config de nuestra aplicacion
                                 i.addCategory(Intent.CATEGORY_DEFAULT);
-                                i.setData(Uri.parse("package:"+getPackageName()));
+                                i.setData(Uri.parse("package:" + getPackageName()));
                                 // FLAG_ACTIVITY_NEW_TASK: If set, this activity will become the start of a new task on this history stack.
                                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 // Remover del historial y de los recientes (Flujo de navegacion entre activities)
@@ -101,6 +102,44 @@ public class ThirdActivity extends AppCompatActivity {
 
             }
 
+        });
+
+        // Boton para web
+
+        imgBtnWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = editTextWeb.getText().toString();
+                String email = "kvnzavalza";
+
+                if (url != null && !url.isEmpty()) {
+                    Intent intentWeb = new Intent();
+                    intentWeb.setAction(Intent.ACTION_VIEW);
+                    intentWeb.setData(Uri.parse("http://" + url));
+                    //startActivity(intentWeb);
+
+                    // Ejemplo intent para abrir contactos
+//                    Intent intentContacts = new Intent(Intent.ACTION_VIEW, Uri.parse("content://contacts/people"));
+//                    startActivity(intentContacts);
+
+                    // Ejemplo intent Email
+//                    Intent intentMailTo = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"+email));
+//                    startActivity(intentMailTo);
+
+                    // Ejemplo email completo
+//                    Intent intentEmail = new Intent(Intent.ACTION_VIEW, Uri.parse(email));
+//                    intentEmail.setType("plain/text");
+//                    intentEmail.putExtra(Intent.EXTRA_SUBJECT, "Mail's Title");
+//                    intentEmail.putExtra(Intent.EXTRA_TEXT, "Hi there, i lo  my form app");
+//                    intentEmail.putExtra(Intent.EXTRA_EMAIL, new String[] {"jose@jose.com", "antonio@gmail.com"});
+//                    startActivity(intentEmail);
+
+                    // Telefono 2, sin permisos requeridos
+//                    Intent intentPhone = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:2221026437"));
+//                    startActivity(intentPhone);
+
+                }
+            }
         });
 
     }
