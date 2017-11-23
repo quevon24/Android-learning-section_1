@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
@@ -46,7 +47,41 @@ public class ThirdActivity extends AppCompatActivity {
                     // Comprobar version actual de android del dispositivo
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         // M de marshmallow o versiones mayores
-                        requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PHONE_CALL_CODE);
+                        // requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PHONE_CALL_CODE);
+
+                        // Comprobar si ha aceptado, no ha aceptado, o nunca se le ha preguntado
+                        if (CheckPermission(Manifest.permission.CALL_PHONE)) {
+                            // Ha aceptado
+                            Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
+                            if (ActivityCompat.checkSelfPermission(ThirdActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
+                                return;
+                            startActivity(i);
+
+                        } else {
+                            // No ha aceptado/primera vez que se le pregunta
+
+                            if (shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE)) {
+                                // No se le ha preguntado aun, entonces se le pregunta
+                                requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PHONE_CALL_CODE);
+                            } else {
+                                // Ha denegado
+                                Toast.makeText(ThirdActivity.this, "Habilitar permiso", Toast.LENGTH_SHORT).show();
+                                // Intent para abrir detalles configuracion aplicacion
+                                Intent i = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                // pasar info para abrir la config de nuestra aplicacion
+                                i.addCategory(Intent.CATEGORY_DEFAULT);
+                                i.setData(Uri.parse("package:"+getPackageName()));
+                                // FLAG_ACTIVITY_NEW_TASK: If set, this activity will become the start of a new task on this history stack.
+                                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                // Remover del historial y de los recientes (Flujo de navegacion entre activities)
+                                // FLAG_ACTIVITY_NO_HISTORY: If set, the new activity is not kept in the history stack.
+                                // FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS: If set, the new activity is not kept in the list of recently launched activities.
+                                i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                                startActivity(i);
+                            }
+                        }
+
                     } else {
                         // Versiones menores a marshmallow
                         OlderVersions(phoneNumber);
@@ -57,7 +92,7 @@ public class ThirdActivity extends AppCompatActivity {
             }
 
             private void OlderVersions(String phoneNumber) {
-                Intent intentCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phoneNumber));
+                Intent intentCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
                 if (CheckPermission(Manifest.permission.CALL_PHONE)) {
                     startActivity(intentCall);
                 } else {
