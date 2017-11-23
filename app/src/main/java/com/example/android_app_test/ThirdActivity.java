@@ -35,6 +35,9 @@ public class ThirdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
 
+        // Activar flecha de atras
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         editTextPhone = (EditText) findViewById(R.id.editTextPhone);
         editTextWeb = (EditText) findViewById(R.id.editTextWeb);
         imgBtnPhone = (ImageButton) findViewById(R.id.imageButtonPhone);

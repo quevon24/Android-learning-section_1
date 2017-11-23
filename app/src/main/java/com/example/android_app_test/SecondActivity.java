@@ -18,6 +18,10 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        // Activar flecha de atras
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         textView = (TextView) findViewById(R.id.textViewMain);
 
         // Tomar los datos del intent
